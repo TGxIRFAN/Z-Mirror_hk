@@ -362,8 +362,8 @@ help_string = f'''
 
 @new_thread
 async def bot_help(_, message):
-    reply_message = await sendMessage(message, help_string)
-    await auto_delete_message(message, reply_message)
+    hmsg = await sendMessage(message, help_string)
+    await auto_delete_message(message, hmsg)
 
 
 async def restart_notification():
