@@ -22,14 +22,14 @@ async def __onDownloadStarted(api, gid):
         return
     if download.is_metadata:
         LOGGER.info(f'onDownloadStarted: {gid} METADATA')
-        await sleep(1)
+        await sleep(3)
         if dl := await getDownloadByGid(gid):
             listener = dl.listener()
             if listener.select:
                 metamsg = "Downloading Metadata, wait then you can select files. Use torrent file to avoid this wait."
                 meta = await sendMessage(listener.message, metamsg)
                 while True:
-                    await sleep(0.5)
+                    await sleep(3)
                     if download.is_removed or download.followed_by_ids:
                         await deleteMessage(meta)
                         break
