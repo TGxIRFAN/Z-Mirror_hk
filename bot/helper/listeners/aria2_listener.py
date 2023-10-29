@@ -40,28 +40,26 @@ async def __onDownloadStarted(api, gid):
     - Size: {download.total_length}')
     if config_dict['STOP_DUPLICATE']:
         await sleep(1)
-        if dl is None:
-            dl = await getDownloadByGid(gid)
-        if dl:
-            if not hasattr(dl, 'listener'):
-                LOGGER.warning(
-                    f"onDownloadStart: {gid}. STOP_DUPLICATE didn't pass since download completed earlier!")
                 return
-            listener = dl.listener()
-            if not listener.isLeech and not listener.select and listener.upPath == 'gd':
-                download = await sync_to_async(api.get_download, gid)
-                if not download.is_torrent:
-                    await sleep(3)
-                    download = download.live
-            name = download.name
-            msg, button = await stop_duplicate_check(name, listener)
-            if msg:
-                amsg = await listener.onDownloadError(msg, button)
-                await sync_to_async(api.remove, [download], force=True, files=True)
-                await delete_links(listener.message)
-                if config_dict['DELETE_LINKS']:
-                    await auto_delete_message(listener.message, amsg)
-                return
+        dl = await getDownloadByGid(gid)
+        if dl and not hasattr(dl, 'listener'):
+            LOGGER.warning(f"onDownloadStart: {gid}. STOP_DUPLICATE didn't pass since download completed earlier!")
+            return
+        listener = dl.listener()
+        if not listener.isLeech and not listener.select and listener.upPath == 'gd':
+            download = await sync_to_async(api.get_download, gid)
+            if not download.is_torrent:
+                await sleep(3)
+                download = download.live
+        name = download.name
+        msg, button = await stop_duplicate_check(name, listener)
+        if msg:
+            amsg = await listener.onDownloadError(msg, button)
+            await sync_to_async(api.remove, [download], force=True, files=True)
+            await delete_links(listener.message)
+            await auto_delete_message(listener.message, amsg)
+            return
+
     if any([config_dict['DIRECT_LIMIT'],
             config_dict['TORRENT_LIMIT'],
             config_dict['LEECH_LIMIT'],
