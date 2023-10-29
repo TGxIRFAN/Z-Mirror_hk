@@ -316,7 +316,8 @@ help_string = f'''
 
 <b>Cancel Tasks:</b>
 /{BotCommands.CancelMirror}: Cancel task by gid or reply.
-/{BotCommands.CancelAllCommand[0]} : Cancel all tasks which added by you /{BotCommands.CancelAllCommand[1]} to in bots.
+/{BotCommands.CancelAllCommand[0]} : Cancel all tasks which added by you.
+/{BotCommands.CancelAllCommand[1]} : Cancel your all tasks in all bots.
 
 <b>Torrent/Drive Search:</b>
 /{BotCommands.ListCommand} [query]: Search in Google Drive(s).
