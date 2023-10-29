@@ -37,7 +37,7 @@ async def __onDownloadStarted(api, gid):
         return
     else:
         LOGGER.info(f'onDownloadStarted: {download.name} - Gid: {gid}')
-    dl = None
+    - Size: {download.total_length}')
     if config_dict['STOP_DUPLICATE']:
         await sleep(1)
         if dl is None:
