@@ -51,6 +51,11 @@ async def stats(_, message, edit_mode=False):
     tb          = get_readable_file_size(net_io_counters().bytes_sent + net_io_counters().bytes_recv)
     cpuUsage    = cpu_percent(interval=0.1)
     v_core      = cpu_count(logical=True) - cpu_count(logical=False)
+    freq_info   = cpu_freq(percpu=False)
+    if freq_info is not None:
+        frequency = freq_info.current / 1000
+    else:
+        frequency = '-_-'
     memory      = virtual_memory()
     mem_p       = memory.percent
     swap        = swap_memory()
