@@ -40,6 +40,9 @@ async def __onDownloadStarted(api, gid):
     - Size: {download.total_length}')
     if config_dict['STOP_DUPLICATE']:
         await sleep(1)
+        dl = await getDownloadByGid(gid)
+        if dl and not hasattr(dl, 'listener'):
+            LOGGER.warning(f"onDownloadStart: {gid}. STOP_DUPLICATE didn't pass since download completed earlier!")
                 return
         dl = await getDownloadByGid(gid)
         if dl and not hasattr(dl, 'listener'):
