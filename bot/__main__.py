@@ -146,7 +146,7 @@ async def send_repo_stats(_, query):
                 logs          = latest_commit["commit"]["message"].split('\n\n')
                 c_log         = logs[0]
                 vtag = latest_tag["name"]
-        if await aiopath.exists('.git')
+        if await aiopath.exists('.git'):
             last_commit = (await cmd_exec("git log -1   --date=short --pretty=format:'%cr'", True))[0]
             version     = (await cmd_exec("git describe --abbrev=0   --tags",                True))[0]
             change_log  = (await cmd_exec("git log -1   --pretty=format:'%s'",               True))[0]
