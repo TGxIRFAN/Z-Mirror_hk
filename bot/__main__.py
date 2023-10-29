@@ -339,6 +339,10 @@ help_string = f'''
 /{BotCommands.StatsCommand[0]} or /{BotCommands.StatsCommand[1]}: Show server stats.
 /{BotCommands.PingCommand[0]} or /{BotCommands.PingCommand[1]}: Check how long it takes to Ping the Bot.
 
+<b>Database Management:</b>
+/{BotCommands.RmdbCommand}: To remove active tasks from database (Only Owner & Sudo).
+/{BotCommands.RmalltokensCommand}: To remove all access tokens from database (Only Owner & Sudo).
+
 <b>Maintainance:</b>
 /{BotCommands.RestartCommand[0]}: Restart and update the bot (Only Owner & Sudo).
 /{BotCommands.RestartCommand[1]}: Restart and update all bots (Only Owner & Sudo).
